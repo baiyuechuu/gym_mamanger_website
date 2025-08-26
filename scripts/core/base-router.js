@@ -97,7 +97,7 @@ class BaseRouter {
 	}
 
 	async updateMainContent(route) {
-		const mainContent = document.querySelector(".ml-12.sm\\:ml-64");
+		const mainContent = document.querySelector(".ml-12.sm\\:ml-48");
 		const routeData = this.routes[route];
 
 		if (mainContent && routeData) {

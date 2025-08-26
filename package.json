@@ -8,13 +8,18 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.1.10"
   },
-  "keywords": ["gym", "management", "nodejs", "express"],
+  "keywords": [
+    "gym",
+    "management",
+    "nodejs",
+    "express"
+  ],
   "author": "Your Name",
   "license": "MIT"
 }
