@@ -52,8 +52,17 @@ class GymRouter {
 		// Remove active class from all nav links
 		const navLinks = document.querySelectorAll("nav a");
 		navLinks.forEach((link) => {
-			link.classList.remove("bg-white", "dark:bg-gray-700", "text-purple-700", "dark:text-white");
-			link.classList.add("hover:bg-purple-700/50", "dark:hover:bg-gray-700/50", "transition-colors");
+			link.classList.remove(
+				"bg-white",
+				"dark:bg-gray-700",
+				"text-purple-700",
+				"dark:text-white",
+			);
+			link.classList.add(
+				"hover:bg-purple-700/50",
+				"dark:hover:bg-gray-700/50",
+				"transition-colors",
+			);
 		});
 
 		// Add active class to current route
@@ -61,7 +70,12 @@ class GymRouter {
 			`nav a[data-route="${activeRoute}"]`,
 		);
 		if (activeLink) {
-			activeLink.classList.add("bg-white", "dark:bg-gray-700", "text-purple-700", "dark:text-white");
+			activeLink.classList.add(
+				"bg-white",
+				"dark:bg-gray-700",
+				"text-purple-700",
+				"dark:text-white",
+			);
 			activeLink.classList.remove(
 				"hover:bg-purple-700/50",
 				"dark:hover:bg-gray-700/50",
@@ -78,12 +92,13 @@ class GymRouter {
 			try {
 				const templateContent = await this.loadTemplate(routeData.templatePath);
 				mainContent.innerHTML = templateContent;
-				
+
 				// Initialize route-specific functionality
 				this.initializeRouteFeatures(route);
 			} catch (error) {
 				console.error("Error loading template:", error);
-				mainContent.innerHTML = '<div class="p-3"><div class="text-red-500">Error loading content. Please try again.</div></div>';
+				mainContent.innerHTML =
+					'<div class="p-3"><div class="text-red-500">Error loading content. Please try again.</div></div>';
 			}
 		}
 	}
@@ -91,13 +106,13 @@ class GymRouter {
 	initializeRouteFeatures(route) {
 		// Initialize features specific to each route
 		switch (route) {
-			case 'overview':
+			case "overview":
 				this.initializeOverviewFeatures();
 				break;
-			case 'reports':
+			case "reports":
 				// Future: Initialize reports features
 				break;
-			case 'settings':
+			case "settings":
 				// Future: Initialize settings features
 				break;
 		}
@@ -112,10 +127,83 @@ class GymRouter {
 					this.searchManager = new window.SearchManager();
 				}
 				this.searchManager.init();
-				
+
 				// Make search manager globally accessible for the clear search button
 				window.gymRouter = this;
 			}, 100);
+		}
+
+		// Load gym members data for the overview table
+		setTimeout(() => {
+			this.loadGymMembersData();
+		}, 50);
+	}
+
+	// Function to load and display gym members data from JSON
+	async loadGymMembersData() {
+		try {
+			const response = await fetch("data/gym-members.json");
+			const data = await response.json();
+			const tableBody = document.getElementById("booking-table-body");
+
+			if (!tableBody) {
+				console.warn("Table body element not found");
+				return;
+			}
+
+			// Clear existing content
+			tableBody.innerHTML = "";
+
+			// Populate table with data from JSON
+			data.members.forEach((member) => {
+				const row = document.createElement("tr");
+				row.className = "hover:bg-gray-50 dark:hover:bg-gray-600";
+
+				row.innerHTML = `
+					<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+						${member.bookingNo}
+					</td>
+					<td class="px-6 py-4">
+						<div class="flex items-center">
+							<span class="text-sm text-gray-900 dark:text-gray-100">${member.name}</span>
+						</div>
+					</td>
+					<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+						${member.sex}
+					</td>
+					<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+						${member.age}
+					</td>
+					<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+						${member.email}
+					</td>
+					<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+						${member.mobile}
+					</td>
+					<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+						${member.lastVisit}
+					</td>
+					<td class="px-6 py-4">
+						<span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${member.statusClass} whitespace-nowrap">
+							${member.expiryStatus}
+						</span>
+					</td>
+				`;
+
+				tableBody.appendChild(row);
+			});
+		} catch (error) {
+			console.error("Error loading gym members data:", error);
+			const tableBody = document.getElementById("booking-table-body");
+			if (tableBody) {
+				tableBody.innerHTML = `
+					<tr>
+						<td colspan="8" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+							Error loading data. Please try again later.
+						</td>
+					</tr>
+				`;
+			}
 		}
 	}
 

@@ -9,3 +9,31 @@ body {
 	display: none;
 }
 
+.dropdown-menu {
+	transform: translateY(-10px) !important;
+	opacity: 0 !important;
+	visibility: hidden !important;
+	transition: all 0.2s ease-in-out;
+}
+
+.dropdown-menu.show {
+	transform: translateY(0) !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+}
+
+.dropdown-chevron {
+	transition: transform 0.2s ease-in-out;
+}
+
+.dropdown-chevron.rotate {
+	transform: rotate(180deg);
+}
+
+.dropdown-option:hover {
+	background: linear-gradient(135deg, rgb(236, 254, 255), rgb(221, 214, 254));
+}
+
+.dark .dropdown-option:hover {
+	background: linear-gradient(135deg, rgb(55, 65, 81), rgb(75, 85, 99));
+}
