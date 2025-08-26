@@ -1,19 +1,23 @@
 <div
-  class="border border-gray-200 bg-white rounded-lg h-[calc(100vh-24px)] overflow-x-hidden overflow-y-auto flex flex-col justify-between"
+  class="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-lg h-[calc(100vh-24px)] overflow-x-hidden overflow-y-auto flex flex-col justify-between transition-colors duration-200"
 >
   <div>
-    <div class="bg-white border-b border-gray-200 px-6 py-4">
+    <div
+      class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4"
+    >
       <div class="flex items-center justify-between">
         <nav class="flex items-center space-x-2 text-sm">
           <a
             href="#"
-            class="flex items-center space-x-2 text-gray-500 hover:text-gray-700 transition-colors"
+            class="flex items-center space-x-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
           >
             <i class="fa-regular fa-house"></i>
             <span>Home</span>
           </a>
-          <span class="text-gray-400">/</span>
-          <span class="flex items-center space-x-2 text-gray-700 font-medium">
+          <span class="text-gray-400 dark:text-gray-500">/</span>
+          <span
+            class="flex items-center space-x-2 text-gray-700 dark:text-gray-300 font-medium"
+          >
             <span>Overview</span>
           </span>
         </nav>
@@ -36,20 +40,20 @@
             <!-- Filter Dropdowns -->
             <div class="relative">
               <select
-                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                class="appearance-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 pr-8 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
               >
                 <option>All Staff</option>
                 <option>Active Staff</option>
                 <option>Inactive Staff</option>
               </select>
               <i
-                class="fa-regular fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs"
+                class="fa-regular fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-300 text-xs"
               ></i>
             </div>
 
             <div class="relative">
               <select
-                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                class="appearance-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 pr-8 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
               >
                 <option>Status</option>
                 <option>Cash - Paid</option>
@@ -57,28 +61,30 @@
                 <option>Pending</option>
               </select>
               <i
-                class="fa-regular fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs"
+                class="fa-regular fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-300 text-xs"
               ></i>
             </div>
 
             <div class="relative">
               <select
-                class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                class="appearance-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 pr-8 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
               >
                 <option>Monthly</option>
                 <option>Weekly</option>
                 <option>Daily</option>
               </select>
               <i
-                class="fa-regular fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs"
+                class="fa-regular fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-300 text-xs"
               ></i>
             </div>
 
             <!-- Filter Icon -->
             <button
-              class="px-2 py-1.5 border border-gray-300 rounded-lg hover:bg-gray-50"
+              class="px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 bg-white dark:bg-gray-700"
             >
-              <i class="fa-regular fa-filter text-gray-600"></i>
+              <i
+                class="fa-regular fa-filter text-gray-600 dark:text-gray-300"
+              ></i>
             </button>
           </div>
 
@@ -86,361 +92,250 @@
             <!-- Search -->
             <div class="relative">
               <i
-                class="fa-regular fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                class="fa-regular fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-300"
               ></i>
               <input
                 type="text"
                 placeholder="Search..."
-                class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+                class="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
               />
             </div>
           </div>
         </div>
 
         <!-- Data Table -->
-        <div class="bg-white overflow-hidden">
+        <div
+          class="bg-white dark:bg-gray-700 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-600"
+        >
           <div class="overflow-x-auto flex flex-col justify-between">
-            <table class="w-full">
-              <thead class="bg-gray-50 border-b border-gray-200 sticky top-0">
+            <table class="w-full overflow-x-auto">
+              <thead
+                class="bg-gray-50 dark:bg-gray-600 border-b border-gray-200 dark:border-gray-500 sticky top-0"
+              >
                 <tr>
                   <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                   >
                     Booking No
                   </th>
                   <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                   >
                     Name of Guest
                   </th>
                   <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                   >
                     Sex
                   </th>
                   <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                   >
                     Age
                   </th>
                   <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                   >
                     Email
                   </th>
                   <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                   >
                     Mobile Number
                   </th>
                   <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                   >
                     Last Visit
                   </th>
                   <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                   >
                     Expiry Status
                   </th>
-                  <th
-                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  ></th>
                 </tr>
               </thead>
-              <tbody class="bg-white divide-y divide-gray-200">
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 text-sm text-gray-900">#102112</td>
+              <tbody
+                class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600"
+              >
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    #102112
+                  </td>
                   <td class="px-6 py-4">
                     <div class="flex items-center">
-                      <span class="text-sm text-gray-900">Raiders Kae</span>
+                      <span class="text-sm text-gray-900 dark:text-gray-100"
+                        >Raiders Kae</span
+                      >
                     </div>
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">Font Desks</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">20/12/2024</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    Font Desks
+                  </td>
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    20/12/2024
+                  </td>
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
                     debra.h@gmail.com
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
                     +88 01766703570
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">$1400.00</td>
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    $1400.00
+                  </td>
                   <td class="px-6 py-4">
                     <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800"
+                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 whitespace-nowrap"
                       >Cash - Paid</span
                     >
                   </td>
-                  <td class="px-6 py-4">
-                    <button class="text-gray-400 hover:text-gray-600">
-                      <i class="fa-regular fa-ellipsis-h"></i>
-                    </button>
-                  </td>
                 </tr>
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 text-sm text-gray-900">#102111</td>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    #102111
+                  </td>
                   <td class="px-6 py-4">
                     <div class="flex items-center">
-                      <span class="text-sm text-gray-900">Jassy Mac</span>
+                      <span class="text-sm text-gray-900 dark:text-gray-100"
+                        >Jassy Mac</span
+                      >
                     </div>
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
                     Web Reservation
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">19/12/2024</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    19/12/2024
+                  </td>
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
                     mark@gmail.com
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
                     +88 01966703578
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">$400.00</td>
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    $400.00
+                  </td>
                   <td class="px-6 py-4">
                     <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800"
+                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 whitespace-nowrap"
                       >Cash - Paid</span
                     >
                   </td>
-                  <td class="px-6 py-4">
-                    <button class="text-gray-400 hover:text-gray-600">
-                      <i class="fa-regular fa-ellipsis-h"></i>
-                    </button>
-                  </td>
                 </tr>
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 text-sm text-gray-900">#102110</td>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    #102110
+                  </td>
                   <td class="px-6 py-4">
                     <div class="flex items-center">
-                      <span class="text-sm text-gray-900">Macculam Brad</span>
+                      <span class="text-sm text-gray-900 dark:text-gray-100"
+                        >Macculam Brad</span
+                      >
                     </div>
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">Font Desks</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">18/12/2024</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    Font Desks
+                  </td>
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    18/12/2024
+                  </td>
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
                     brad@gmail.com
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
                     +88 01666703570
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">$9800.00</td>
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    $9800.00
+                  </td>
                   <td class="px-6 py-4">
                     <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800"
+                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400 whitespace-nowrap"
                       >Pending</span
                     >
                   </td>
-                  <td class="px-6 py-4">
-                    <button class="text-gray-400 hover:text-gray-600">
-                      <i class="fa-regular fa-ellipsis-h"></i>
-                    </button>
-                  </td>
                 </tr>
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 text-sm text-gray-900">#102109</td>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    #102109
+                  </td>
                   <td class="px-6 py-4">
                     <div class="flex items-center">
-                      <span class="text-sm text-gray-900">Jhoney Cark</span>
+                      <span class="text-sm text-gray-900 dark:text-gray-100"
+                        >Jhoney Cark</span
+                      >
                     </div>
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
                     Group Reservation
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">17/12/2024</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    17/12/2024
+                  </td>
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
                     cark@gmail.com
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
                     +88 01966703570
                   </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">$2400.00</td>
+                  <td
+                    class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100"
+                  >
+                    $2400.00
+                  </td>
                   <td class="px-6 py-4">
                     <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800"
+                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 whitespace-nowrap"
                       >Online - Paid</span
                     >
-                  </td>
-                  <td class="px-6 py-4">
-                    <button class="text-gray-400 hover:text-gray-600">
-                      <i class="fa-regular fa-ellipsis-h"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 text-sm text-gray-900">#102108</td>
-                  <td class="px-6 py-4">
-                    <div class="flex items-center">
-                      <span class="text-sm text-gray-900">Jhon Brak</span>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">Font Desks</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">16/12/2024</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    jhon@gmail.com
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    +88 01766703544
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">$1400.00</td>
-                  <td class="px-6 py-4">
-                    <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800"
-                      >Pending</span
-                    >
-                  </td>
-                  <td class="px-6 py-4">
-                    <button class="text-gray-400 hover:text-gray-600">
-                      <i class="fa-regular fa-ellipsis-h"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 text-sm text-gray-900">#102107</td>
-                  <td class="px-6 py-4">
-                    <div class="flex items-center">
-                      <span class="text-sm text-gray-900">Red Alone</span>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    Group Reservation
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">15/12/2024</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    redh@gmail.com
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    +88 01766703533
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">$980.00</td>
-                  <td class="px-6 py-4">
-                    <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800"
-                      >Cash - Paid</span
-                    >
-                  </td>
-                  <td class="px-6 py-4">
-                    <button class="text-gray-400 hover:text-gray-600">
-                      <i class="fa-regular fa-ellipsis-h"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 text-sm text-gray-900">#102106</td>
-                  <td class="px-6 py-4">
-                    <div class="flex items-center">
-                      <span class="text-sm text-gray-900">Sude Rayden</span>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    Web Reservation
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">13/12/2024</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    raydan@gmail.com
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    +88 01766703570
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">$654.00</td>
-                  <td class="px-6 py-4">
-                    <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800"
-                      >Cash - Paid</span
-                    >
-                  </td>
-                  <td class="px-6 py-4">
-                    <button class="text-gray-400 hover:text-gray-600">
-                      <i class="fa-regular fa-ellipsis-h"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 text-sm text-gray-900">#102106</td>
-                  <td class="px-6 py-4">
-                    <div class="flex items-center">
-                      <span class="text-sm text-gray-900">Sude Rayden</span>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    Web Reservation
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">13/12/2024</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    raydan@gmail.com
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    +88 01766703570
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">$654.00</td>
-                  <td class="px-6 py-4">
-                    <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800"
-                      >Cash - Paid</span
-                    >
-                  </td>
-                  <td class="px-6 py-4">
-                    <button class="text-gray-400 hover:text-gray-600">
-                      <i class="fa-regular fa-ellipsis-h"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 text-sm text-gray-900">#102106</td>
-                  <td class="px-6 py-4">
-                    <div class="flex items-center">
-                      <span class="text-sm text-gray-900">Sude Rayden</span>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    Web Reservation
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">13/12/2024</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    raydan@gmail.com
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    +88 01766703570
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">$654.00</td>
-                  <td class="px-6 py-4">
-                    <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800"
-                      >Cash - Paid</span
-                    >
-                  </td>
-                  <td class="px-6 py-4">
-                    <button class="text-gray-400 hover:text-gray-600">
-                      <i class="fa-regular fa-ellipsis-h"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="hover:bg-gray-50">
-                  <td class="px-6 py-4 text-sm text-gray-900">#102106</td>
-                  <td class="px-6 py-4">
-                    <div class="flex items-center">
-                      <span class="text-sm text-gray-900">Sude Rayden</span>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    Web Reservation
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">13/12/2024</td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    raydan@gmail.com
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">
-                    +88 01766703570
-                  </td>
-                  <td class="px-6 py-4 text-sm text-gray-900">$654.00</td>
-                  <td class="px-6 py-4">
-                    <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800"
-                      >Cash - Paid</span
-                    >
-                  </td>
-                  <td class="px-6 py-4">
-                    <button class="text-gray-400 hover:text-gray-600">
-                      <i class="fa-regular fa-ellipsis-h"></i>
-                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -452,9 +347,9 @@
   </div>
   <!-- Pagination -->
   <div
-    class="bg-white p-3 border-t border-gray-200 flex items-center justify-between"
+    class="bg-white dark:bg-gray-800 p-3 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between"
   >
-    <div class="flex items-center border rounded-md border-gray-300">
+    <div class="flex items-center border rounded-md border-gray-300 dark:border-gray-600">
       <button
         class="flex items-center px-3 py-2 text-sm text-gray-500 hover:text-gray-700"
       >
@@ -487,7 +382,7 @@
       </button>
     </div>
 
-    <div class="flex items-center border rounded-md border-gray-300">
+    <div class="flex items-center border rounded-md border-gray-300 dark:border-gray-600">
       <button
         class="flex items-center px-3 py-2 text-sm text-gray-500 hover:text-gray-700"
       >
@@ -497,4 +392,3 @@
     </div>
   </div>
 </div>
-

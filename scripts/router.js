@@ -52,8 +52,8 @@ class GymRouter {
 		// Remove active class from all nav links
 		const navLinks = document.querySelectorAll("nav a");
 		navLinks.forEach((link) => {
-			link.classList.remove("bg-white", "text-purple-700");
-			link.classList.add("hover:bg-purple-700/50", "transition-colors");
+			link.classList.remove("bg-white", "dark:bg-gray-700", "text-purple-700", "dark:text-white");
+			link.classList.add("hover:bg-purple-700/50", "dark:hover:bg-gray-700/50", "transition-colors");
 		});
 
 		// Add active class to current route
@@ -61,9 +61,10 @@ class GymRouter {
 			`nav a[data-route="${activeRoute}"]`,
 		);
 		if (activeLink) {
-			activeLink.classList.add("bg-white", "text-purple-700");
+			activeLink.classList.add("bg-white", "dark:bg-gray-700", "text-purple-700", "dark:text-white");
 			activeLink.classList.remove(
 				"hover:bg-purple-700/50",
+				"dark:hover:bg-gray-700/50",
 				"transition-colors",
 			);
 		}
@@ -120,8 +121,3 @@ class GymRouter {
 		}
 	}
 }
-
-// Initialize the router when the DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
-	window.gymRouter = new GymRouter();
-});

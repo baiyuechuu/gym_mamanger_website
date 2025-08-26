@@ -4,20 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gym Manager</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class'
+      }
+    </script>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/aquawolf04/font-awesome-pro@5cd1511/css/all.css"
     />
   </head>
-  <body class="bg-gray-100 font-inter">
+  <body class="bg-gray-100 dark:bg-gray-900 font-inter transition-colors duration-200">
     <!-- Sidebar -->
     <div
-      class="fixed left-0 top-0 h-screen w-12 sm:w-64 bg-gradient-to-b from-purple-600 to-purple-800 text-white flex flex-col pb-2"
+      class="fixed left-0 top-0 h-screen w-12 sm:w-64 bg-gradient-to-b from-purple-600 to-purple-800 dark:from-gray-800 dark:to-gray-900 text-white flex flex-col pb-2"
     >
       <!-- User Profile Section -->
-      <div class="py-2 sm:px-3 border-b border-purple-500/30">
-        <div class="flex items-center justify-center sm:space-x-3">
+      <div class="py-2 sm:px-3 border-b border-gray-300/30 dark:border-gray-600/30">
+        <div class="flex items-center justify-center sm:justify-normal sm:space-x-3">
           <div
             class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center"
           >
@@ -25,7 +30,7 @@
           </div>
           <div>
             <div class="font-semibold text-sm hidden sm:block">Admin</div>
-            <div class="text-purple-200 text-xs hidden sm:block">admin@gym.com</div>
+            <div class="text-purple-200 dark:text-gray-300 text-xs hidden sm:block">admin@gym.com</div>
           </div>
         </div>
       </div>
@@ -36,7 +41,7 @@
           <li>
             <a
               href="#"
-              class="flex items-center space-x-3 p-2 rounded-md hover:bg-purple-700/50 transition-colors"
+              class="flex items-center space-x-3 p-2 rounded-md hover:bg-purple-700/50 dark:hover:bg-gray-700/50 transition-colors"
             >
               <i class="fa-regular fa-house"></i>
               <span class="hidden sm:block">Overview</span>
@@ -45,7 +50,7 @@
           <li>
             <a
               href="#"
-              class="flex items-center space-x-3 p-2 rounded-md bg-white text-purple-700"
+              class="flex items-center space-x-3 p-2 rounded-md bg-white dark:bg-gray-700 text-purple-700 dark:text-white"
             >
               <i class="fa-regular fa-chart-simple"></i>
               <span class="hidden sm:block">Reports</span>
@@ -54,7 +59,7 @@
           <li>
             <a
               href="#"
-              class="flex items-center space-x-3 p-2 rounded-md hover:bg-purple-700/50 transition-colors"
+              class="flex items-center space-x-3 p-2 rounded-md hover:bg-purple-700/50 dark:hover:bg-gray-700/50 transition-colors"
             >
               <i class="fa-regular fa-gear"></i>
               <span class="hidden sm:block">Settings</span>
@@ -63,10 +68,21 @@
         </ul>
       </nav>
 
+      <!-- Theme Toggle Button -->
+      <div class="px-3 py-1 flex items-center justify-center">
+        <button
+          id="theme-toggle"
+          class="w-full bg-purple-700/50 dark:bg-gray-700/50 hover:bg-purple-700 dark:hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-4 mb-2"
+        >
+          <span class="hidden sm:block">Toggle Theme</span>
+          <i id="theme-icon" class="fa-regular fa-moon"></i>
+        </button>
+      </div>
+
       <!-- Logout Button -->
       <div class="px-3 py-1 flex items-center justify-center">
         <button
-          class="w-full bg-purple-700/50 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-4"
+          class="w-full bg-purple-700/50 dark:bg-gray-700/50 hover:bg-purple-700 dark:hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-4"
         >
           <span class="hidden sm:block">Log out</span>
           <i class="fa-regular fa-arrow-right-from-bracket"></i>
@@ -79,6 +95,9 @@
       <!-- Content will be dynamically loaded here -->
     </div>
 
-    <script src="scripts/index.js"></script>
+    <!-- Core JavaScript Modules -->
+    <script src="scripts/router.js"></script>
+    <script src="scripts/theme-manager.js"></script>
+    <script src="scripts/app.js"></script>
   </body>
 </html>
