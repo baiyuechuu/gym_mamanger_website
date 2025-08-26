@@ -1,105 +1,106 @@
 // User Detail Manager - Handles user detail page functionality
 class UserDetailManager {
-	constructor(router) {
-		this.router = router;
-	}
+    constructor(router) {
+        this.router = router;
+        this.dataManager = new DataManager();
+    }
 
-	initialize() {
-		// Load user detail data
-		setTimeout(() => {
-			this.loadUserDetailData();
-		}, 100);
-	}
+    async initialize() {
+        await this.loadUserDetailData();
+    }
 
-	async loadUserDetailData() {
-		if (!this.router.currentUserId) {
-			this.showUserDetailError();
-			return;
-		}
+    async loadUserDetailData() {
+        if (!this.router.currentUserId) {
+            this.showError();
+            return;
+        }
 
-		try {
-			// Load gym members data to find the specific user
-			const response = await fetch("data/gym-members.json");
-			const data = await response.json();
-			
-			// Find the user by booking number
-			const user = data.members.find(member => member.bookingNo === this.router.currentUserId);
-			
-			if (!user) {
-				this.showUserDetailError();
-				return;
-			}
+        try {
+            // Load data
+            const result = await this.dataManager.loadGymMembersData();
+            if (!result.success) {
+                this.showError();
+                return;
+            }
 
-			// Hide loading state and show user details
-			this.hideLoadingState();
-			this.displayUserDetails(user);
-			
-		} catch (error) {
-			console.error("Error loading user detail data:", error);
-			this.showUserDetailError();
-		}
-	}
+            // Find the user
+            const user = this.dataManager.findMemberByBookingNo(this.router.currentUserId);
+            
+            if (!user) {
+                this.showError();
+                return;
+            }
 
-	hideLoadingState() {
-		const loadingState = document.getElementById("loading-state");
-		const errorState = document.getElementById("error-state");
-		const memberDetails = document.getElementById("member-details");
-		
-		if (loadingState) loadingState.classList.add("hidden");
-		if (errorState) errorState.classList.add("hidden");
-		if (memberDetails) memberDetails.classList.remove("hidden");
-	}
+            // Display user details
+            this.hideLoadingState();
+            this.displayUserDetails(user);
+            
+        } catch (error) {
+            console.error("Error loading user detail data:", error);
+            this.showError();
+        }
+    }
 
-	showUserDetailError() {
-		const loadingState = document.getElementById("loading-state");
-		const errorState = document.getElementById("error-state");
-		const memberDetails = document.getElementById("member-details");
-		
-		if (loadingState) loadingState.classList.add("hidden");
-		if (errorState) errorState.classList.remove("hidden");
-		if (memberDetails) memberDetails.classList.add("hidden");
-	}
+    hideLoadingState() {
+        const loadingState = document.getElementById("loading-state");
+        const errorState = document.getElementById("error-state");
+        const memberDetails = document.getElementById("member-details");
+        
+        if (loadingState) loadingState.classList.add("hidden");
+        if (errorState) errorState.classList.add("hidden");
+        if (memberDetails) memberDetails.classList.remove("hidden");
+    }
 
-	displayUserDetails(user) {
-		// Update header information
-		const memberName = document.getElementById("member-name");
-		const memberBookingNo = document.getElementById("member-booking-no");
-		
-		if (memberName) memberName.textContent = user.name;
-		if (memberBookingNo) memberBookingNo.textContent = user.bookingNo;
+    showError() {
+        const loadingState = document.getElementById("loading-state");
+        const errorState = document.getElementById("error-state");
+        const memberDetails = document.getElementById("member-details");
+        
+        if (loadingState) loadingState.classList.add("hidden");
+        if (errorState) errorState.classList.remove("hidden");
+        if (memberDetails) memberDetails.classList.add("hidden");
+    }
 
-		// Update personal information
-		const detailName = document.getElementById("detail-name");
-		const detailSex = document.getElementById("detail-sex");
-		const detailAge = document.getElementById("detail-age");
-		const detailBookingNo = document.getElementById("detail-booking-no");
-		
-		if (detailName) detailName.textContent = user.name;
-		if (detailSex) detailSex.textContent = user.sex;
-		if (detailAge) detailAge.textContent = user.age;
-		if (detailBookingNo) detailBookingNo.textContent = user.bookingNo;
+    displayUserDetails(user) {
+        // Update header information
+        this.updateElement("member-name", user.name);
+        this.updateElement("member-booking-no", user.bookingNo);
 
-		// Update contact information
-		const detailEmail = document.getElementById("detail-email");
-		const detailMobile = document.getElementById("detail-mobile");
-		
-		if (detailEmail) {
-			detailEmail.textContent = user.email;
-			detailEmail.href = `mailto:${user.email}`;
-		}
-		if (detailMobile) {
-			detailMobile.textContent = user.mobile;
-			detailMobile.href = `tel:${user.mobile}`;
-		}
+        // Update personal information
+        this.updateElement("detail-name", user.name);
+        this.updateElement("detail-sex", user.sex);
+        this.updateElement("detail-age", user.age);
+        this.updateElement("detail-booking-no", user.bookingNo);
 
-		// Update membership status
-		const detailStatus = document.getElementById("detail-status");
-		const detailLastVisit = document.getElementById("detail-last-visit");
-		
-		if (detailStatus) {
-			detailStatus.textContent = user.expiryStatus;
-			detailStatus.className = `inline-flex px-3 py-1 text-sm font-semibold rounded-full ${user.statusClass}`;
-		}
-		if (detailLastVisit) detailLastVisit.textContent = user.lastVisit;
-	}
+        // Update contact information
+        this.updateContactElement("detail-email", user.email, `mailto:${user.email}`);
+        this.updateContactElement("detail-mobile", user.mobile, `tel:${user.mobile}`);
+
+        // Update membership status
+        this.updateStatusElement("detail-status", user.expiryStatus, user.statusClass);
+        this.updateElement("detail-last-visit", user.lastVisit);
+    }
+
+    updateElement(id, text) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = text;
+        }
+    }
+
+    updateContactElement(id, text, href) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = text;
+            element.href = href;
+        }
+    }
+
+    updateStatusElement(id, text, className) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = text;
+            element.className = `inline-flex px-3 py-1 text-sm font-semibold rounded-full ${className}`;
+        }
+    }
 }

@@ -40,7 +40,7 @@
         <ul class="space-y-1">
           <li>
             <a
-              href="#"
+              href="#overview"
               class="flex items-center space-x-3 p-2 rounded-md hover:bg-purple-700/50 dark:hover:bg-gray-700/50 transition-colors"
             >
               <i class="fa-regular fa-house"></i>
@@ -49,22 +49,22 @@
           </li>
           <li>
             <a
-              href="#"
-              class="flex items-center space-x-3 p-2 rounded-md bg-white dark:bg-gray-700 text-purple-700 dark:text-white"
+              href="#reports"
+              class="flex items-center space-x-3 p-2 rounded-md hover:bg-purple-700/50 dark:hover:bg-gray-700/50 transition-colors"
             >
               <i class="fa-regular fa-chart-simple"></i>
               <span class="hidden sm:block">Reports</span>
             </a>
           </li>
-          <!-- <li> -->
-          <!--   <a -->
-          <!--     href="#" -->
-          <!--     class="flex items-center space-x-3 p-2 rounded-md hover:bg-purple-700/50 dark:hover:bg-gray-700/50 transition-colors" -->
-          <!--   > -->
-          <!--     <i class="fa-regular fa-gear"></i> -->
-          <!--     <span class="hidden sm:block">Settings</span> -->
-          <!--   </a> -->
-          <!-- </li> -->
+          <li>
+            <a
+              href="#settings"
+              class="flex items-center space-x-3 p-2 rounded-md hover:bg-purple-700/50 dark:hover:bg-gray-700/50 transition-colors"
+            >
+              <i class="fa-regular fa-gear"></i>
+              <span class="hidden sm:block">Settings</span>
+            </a>
+          </li>
         </ul>
       </nav>
 
@@ -96,13 +96,15 @@
     </div>
 
     <!-- Core JavaScript Modules -->
-    <script src="scripts/core/base-router.js"></script>
-    <script src="scripts/features/overview-manager.js"></script>
+    <script src="scripts/features/auth-manager.js"></script>
+    <script src="scripts/features/data-manager.js"></script>
+    <script src="scripts/features/search-manager.js"></script>
     <script src="scripts/features/pagination-manager.js"></script>
+    <script src="scripts/features/modal-manager.js"></script>
+    <script src="scripts/features/overview-manager.js"></script>
     <script src="scripts/features/user-detail-manager.js"></script>
-    <script src="scripts/router.js"></script>
+    <script src="scripts/core/router.js"></script>
     <script src="scripts/theme-manager.js"></script>
-    <script src="scripts/search-manager.js"></script>
     <script src="scripts/app.js"></script>
   </body>
 </html>
