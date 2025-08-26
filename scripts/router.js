@@ -122,30 +122,104 @@ class GymRouter {
 		// Initialize pagination state
 		this.pagination = {
 			currentPage: 1,
-			itemsPerPage: 4,
+			itemsPerPage: 10,
 			totalItems: 0,
 			totalPages: 0,
-			allData: []
+			allData: [],
+			filteredData: [] // Add filtered data for search
 		};
 
 		// Initialize search functionality for the overview page
-		if (window.SearchManager) {
-			// Use setTimeout to ensure DOM elements are fully rendered
-			setTimeout(() => {
-				if (!this.searchManager) {
-					this.searchManager = new window.SearchManager();
-				}
-				this.searchManager.init();
-
-				// Make search manager globally accessible for the clear search button
-				window.gymRouter = this;
-			}, 100);
-		}
+		setTimeout(() => {
+			this.setupSearchFunctionality();
+			// Make search manager globally accessible for the clear search button
+			window.gymRouter = this;
+		}, 100);
 
 		// Load gym members data for the overview table
 		setTimeout(() => {
 			this.loadGymMembersData();
 		}, 50);
+	}
+
+	// Setup search functionality that works with pagination
+	setupSearchFunctionality() {
+		const searchInput = document.getElementById("booking-search");
+		if (!searchInput) {
+			console.warn("Search input not found");
+			return;
+		}
+
+		// Add search functionality with debouncing
+		let searchTimeout;
+		searchInput.addEventListener("input", (e) => {
+			clearTimeout(searchTimeout);
+			searchTimeout = setTimeout(() => {
+				this.performSearch(e.target.value);
+			}, 300); // 300ms debounce
+		});
+
+		// Clear search on escape key
+		searchInput.addEventListener("keydown", (e) => {
+			if (e.key === "Escape") {
+				e.target.value = "";
+				this.performSearch("");
+			}
+		});
+	}
+
+	// Perform search and update pagination
+	performSearch(searchTerm) {
+		const normalizedSearchTerm = searchTerm.toLowerCase().trim();
+
+		if (normalizedSearchTerm === "") {
+			// Show all data
+			this.pagination.filteredData = [...this.pagination.allData];
+		} else {
+			// Filter data based on search term
+			this.pagination.filteredData = this.pagination.allData.filter((member) => {
+				return this.matchesSearchTerm(member, normalizedSearchTerm);
+			});
+		}
+
+		// Reset to first page and update pagination
+		this.pagination.currentPage = 1;
+		this.pagination.totalItems = this.pagination.filteredData.length;
+		this.pagination.totalPages = Math.ceil(this.pagination.totalItems / this.pagination.itemsPerPage);
+
+		// Update display
+		this.displayCurrentPage();
+		this.setupPaginationControls();
+	}
+
+	// Check if member matches search term
+	matchesSearchTerm(member, searchTerm) {
+		const searchableFields = [
+			member.bookingNo,
+			member.name,
+			member.sex,
+			member.age.toString(),
+			member.email,
+			member.mobile,
+			member.lastVisit,
+			member.expiryStatus,
+		];
+
+		// Support multiple search terms (space-separated)
+		const searchTerms = searchTerm.split(" ").filter((term) => term.length > 0);
+
+		return searchTerms.every((term) =>
+			searchableFields.some((field) => field.toLowerCase().includes(term)),
+		);
+	}
+
+	// Method to clear search
+	clearSearch() {
+		const searchInput = document.getElementById("booking-search");
+		if (searchInput) {
+			searchInput.value = "";
+			this.performSearch("");
+		}
 	}
 
 	// Function to load and display gym members data from JSON
@@ -156,6 +230,7 @@ class GymRouter {
 			
 			// Store all data for pagination
 			this.pagination.allData = data.members;
+			this.pagination.filteredData = [...data.members]; // Initialize filtered data
 			this.pagination.totalItems = data.members.length;
 			this.pagination.totalPages = Math.ceil(this.pagination.totalItems / this.pagination.itemsPerPage);
 			
@@ -191,7 +266,28 @@ class GymRouter {
 		// Calculate start and end indices for current page
 		const startIndex = (this.pagination.currentPage - 1) * this.pagination.itemsPerPage;
 		const endIndex = startIndex + this.pagination.itemsPerPage;
-		const currentPageData = this.pagination.allData.slice(startIndex, endIndex);
+		const currentPageData = this.pagination.filteredData.slice(startIndex, endIndex);
+
+		// Check if there are no results to display
+		if (currentPageData.length === 0 && this.pagination.filteredData.length === 0) {
+			// Show "no results found" message
+			const noResultsRow = document.createElement("tr");
+			noResultsRow.innerHTML = `
+				<td colspan="8" class="px-6 py-8 text-center">
+					<div class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400">
+						<i class="fa-regular fa-search text-3xl mb-3"></i>
+						<h3 class="text-lg font-medium mb-1">No members found</h3>
+						<p class="text-sm">Try adjusting your search terms or clear the search to see all members.</p>
+						<button onclick="window.gymRouter?.clearSearch()" 
+								class="mt-3 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm">
+							Clear Search
+						</button>
+					</div>
+				</td>
+			`;
+			tableBody.appendChild(noResultsRow);
+			return;
+		}
 
 		// Populate table with current page data
 		currentPageData.forEach((member) => {
