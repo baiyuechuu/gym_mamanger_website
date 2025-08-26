@@ -68,7 +68,7 @@ class OverviewManager {
             </td>
             <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">${member.sex}</td>
             <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">${member.age}</td>
-            <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">${member.email}</td>
+            <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100" title="${member.email}">${member.email.length > 20 ? member.email.substring(0, 20) + '...' : member.email}</td>
             <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">${member.mobile}</td>
             <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">${member.lastVisit}</td>
             <td class="px-6 py-4">

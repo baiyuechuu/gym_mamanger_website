@@ -2,9 +2,10 @@ const express = require("express");
 const fs = require("fs").promises;
 const path = require("path");
 const cors = require("cors");
+const dotenv = require("dotenv");
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = dotenv.config().parsed?.PORT || 8080;
 
 // Middleware
 app.use(cors());
@@ -69,11 +70,4 @@ app.get("/api/get-members", async (req, res) => {
 // Start server
 app.listen(PORT, () => {
 	console.log(`Server running at http://localhost:${PORT}`);
-	console.log(
-		"You can now add members and they will be saved to the JSON file!",
-	);
-	console.log(
-		"Make sure to access your app at http://localhost:8080 (not any other port)",
-	);
 });
-

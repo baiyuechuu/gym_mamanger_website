@@ -48,6 +48,17 @@ class DataManager {
     }
 
     addMember(memberData) {
+        // Validate member data
+        if (!memberData.bookingNo || !memberData.name || !memberData.email) {
+            throw new Error('Invalid member data - missing required fields');
+        }
+        
+        // Check for duplicates
+        const existingMember = this.findMemberByBookingNo(memberData.bookingNo);
+        if (existingMember) {
+            throw new Error(`Member with booking number ${memberData.bookingNo} already exists`);
+        }
+        
         this.allData.unshift(memberData);
         this.filteredData.unshift(memberData);
     }

@@ -11,11 +11,11 @@ class GymApp {
         this.router = new GymRouter();
         this.themeManager = new ThemeManager();
 
-        // Make instances globally available
-        window.gymRouter = this.router;
-        window.themeManager = this.themeManager;
-        window.gymApp = this;
-    }
+		// Make instances globally available
+		window.gymRouter = this.router;
+		window.themeManager = this.themeManager;
+		window.gymApp = this;
+	}
 }
 
 // Initialize when DOM is loaded
