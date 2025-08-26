@@ -78,10 +78,44 @@ class GymRouter {
 			try {
 				const templateContent = await this.loadTemplate(routeData.templatePath);
 				mainContent.innerHTML = templateContent;
+				
+				// Initialize route-specific functionality
+				this.initializeRouteFeatures(route);
 			} catch (error) {
 				console.error("Error loading template:", error);
 				mainContent.innerHTML = '<div class="p-3"><div class="text-red-500">Error loading content. Please try again.</div></div>';
 			}
+		}
+	}
+
+	initializeRouteFeatures(route) {
+		// Initialize features specific to each route
+		switch (route) {
+			case 'overview':
+				this.initializeOverviewFeatures();
+				break;
+			case 'reports':
+				// Future: Initialize reports features
+				break;
+			case 'settings':
+				// Future: Initialize settings features
+				break;
+		}
+	}
+
+	initializeOverviewFeatures() {
+		// Initialize search functionality for the overview page
+		if (window.SearchManager) {
+			// Use setTimeout to ensure DOM elements are fully rendered
+			setTimeout(() => {
+				if (!this.searchManager) {
+					this.searchManager = new window.SearchManager();
+				}
+				this.searchManager.init();
+				
+				// Make search manager globally accessible for the clear search button
+				window.gymRouter = this;
+			}, 100);
 		}
 	}
 
