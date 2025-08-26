@@ -1,0 +1,179 @@
+<div
+  class="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-lg h-[calc(100vh-24px)] overflow-x-hidden overflow-y-auto flex flex-col transition-colors duration-200"
+>
+  <div>
+    <div
+      class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4"
+    >
+      <div class="flex items-center justify-between">
+        <nav class="flex items-center space-x-2 text-sm">
+          <a
+            href="#overview"
+            class="flex items-center space-x-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+          >
+            <span>Home</span>
+          </a>
+          <span class="text-gray-400 dark:text-gray-500">/</span>
+          <a
+            href="#overview"
+            class="flex items-center space-x-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+          >
+            <span>Overview</span>
+          </a>
+          <span class="text-gray-400 dark:text-gray-500">/</span>
+          <span
+            class="flex items-center space-x-2 text-gray-700 dark:text-gray-300 font-medium"
+          >
+            <span>Info</span>
+          </span>
+        </nav>
+        <div class="flex items-center gap-3">
+          <button
+            onclick="window.gymRouter.navigateTo('overview')"
+            class="flex items-center justify-center rounded-md bg-gray-600 hover:bg-gray-700 px-3 py-1 text-white gap-2 transition-colors"
+          >
+            <i class="fa-regular fa-arrow-left"></i>
+            <span class="hidden sm:block">Back to Overview</span>
+          </button>
+          <button
+            id="edit-member-btn"
+            class="flex items-center justify-center rounded-md bg-blue-600 hover:bg-blue-700 px-3 py-1 text-white gap-2 transition-colors"
+          >
+            <i class="fa-regular fa-edit"></i>
+            <span class="hidden sm:block">Edit Member</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="p-6">
+      <div id="user-detail-content" class="space-y-6">
+        <!-- Loading state -->
+        <div id="loading-state" class="flex items-center justify-center py-12">
+          <div class="text-center">
+            <i class="fa-regular fa-spinner fa-spin text-3xl text-gray-400 dark:text-gray-500 mb-3"></i>
+            <p class="text-gray-500 dark:text-gray-400">Loading member details...</p>
+          </div>
+        </div>
+        
+        <!-- Error state -->
+        <div id="error-state" class="hidden flex items-center justify-center py-12">
+          <div class="text-center">
+            <i class="fa-regular fa-exclamation-triangle text-3xl text-red-500 mb-3"></i>
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Member Not Found</h3>
+            <p class="text-gray-500 dark:text-gray-400 mb-4">The requested member could not be found.</p>
+            <button
+              onclick="window.gymRouter.navigateTo('overview')"
+              class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              Back to Overview
+            </button>
+          </div>
+        </div>
+        
+        <!-- Member details content -->
+        <div id="member-details" class="hidden">
+          <!-- Member Header -->
+          <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg p-6 text-white mb-6">
+            <div class="flex items-center space-x-4">
+              <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                <i class="fa-regular fa-user text-2xl"></i>
+              </div>
+              <div>
+                <h1 id="member-name" class="text-2xl font-bold"></h1>
+                <p id="member-booking-no" class="text-purple-100"></p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Member Information Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Personal Information -->
+            <div class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6">
+              <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                <i class="fa-regular fa-user-circle mr-2 text-purple-600"></i>
+                Personal Information
+              </h2>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
+                  <span class="text-gray-600 dark:text-gray-400">Full Name</span>
+                  <span id="detail-name" class="font-medium text-gray-900 dark:text-white"></span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
+                  <span class="text-gray-600 dark:text-gray-400">Gender</span>
+                  <span id="detail-sex" class="font-medium text-gray-900 dark:text-white"></span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
+                  <span class="text-gray-600 dark:text-gray-400">Age</span>
+                  <span id="detail-age" class="font-medium text-gray-900 dark:text-white"></span>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <span class="text-gray-600 dark:text-gray-400">Booking Number</span>
+                  <span id="detail-booking-no" class="font-medium text-gray-900 dark:text-white"></span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6">
+              <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                <i class="fa-regular fa-address-book mr-2 text-purple-600"></i>
+                Contact Information
+              </h2>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
+                  <span class="text-gray-600 dark:text-gray-400">Email</span>
+                  <a id="detail-email" href="#" class="font-medium text-blue-600 dark:text-blue-400 hover:underline"></a>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <span class="text-gray-600 dark:text-gray-400">Mobile Number</span>
+                  <a id="detail-mobile" href="#" class="font-medium text-blue-600 dark:text-blue-400 hover:underline"></a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Membership Status -->
+            <div class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6">
+              <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                <i class="fa-regular fa-calendar-check mr-2 text-purple-600"></i>
+                Membership Status
+              </h2>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
+                  <span class="text-gray-600 dark:text-gray-400">Status</span>
+                  <span id="detail-status" class="inline-flex px-3 py-1 text-sm font-semibold rounded-full"></span>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <span class="text-gray-600 dark:text-gray-400">Last Visit</span>
+                  <span id="detail-last-visit" class="font-medium text-gray-900 dark:text-white"></span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6">
+              <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                <i class="fa-regular fa-bolt mr-2 text-purple-600"></i>
+                Quick Actions
+              </h2>
+              <div class="space-y-3">
+                <button class="w-full flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                  <i class="fa-regular fa-check mr-2"></i>
+                  Mark as Visited
+                </button>
+                <button class="w-full flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                  <i class="fa-regular fa-credit-card mr-2"></i>
+                  Process Payment
+                </button>
+                <button class="w-full flex items-center justify-center px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition-colors">
+                  <i class="fa-regular fa-envelope mr-2"></i>
+                  Send Message
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

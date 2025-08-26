@@ -1,6 +1,24 @@
 {
   "members": [
     {
+      "bookingNo": "#102113",
+      "name": "baiyuechu",
+      "sex": "Male",
+      "age": 21,
+      "email": "contact@baiyuechu.dev",
+      "mobile": "0397882342",
+      "lastVisit": "26/08/2025",
+      "expiryStatus": "Cash - Paid",
+      "statusClass": "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400",
+      "address": "hehe",
+      "birthday": "2004-04-11",
+      "signupDate": "2025-08-26",
+      "packageType": "6month",
+      "startDate": "2025-08-26",
+      "endDate": "2026-02-26",
+      "paymentDate": "2025-08-26"
+    },
+    {
       "bookingNo": "#102112",
       "name": "Raiders Kae",
       "sex": "Male",
