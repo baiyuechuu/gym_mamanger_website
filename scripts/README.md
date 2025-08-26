@@ -1,52 +1,82 @@
-# Scripts Structure
+# Gym Management System - Scripts
 
-This directory contains all JavaScript files organized into clean, simple modules.
+Clean, simple JavaScript modules for managing gym members and staff.
 
 ## File Structure
 
 ```
 scripts/
 ├── app.js                      # Main application entry point
-├── theme-manager.js            # Theme switching functionality
+├── theme-manager.js            # Dark/light theme switching
 ├── core/
-│   └── router.js              # Core routing and navigation
+│   └── router.js              # Page routing and navigation
 └── features/
-    ├── data-manager.js        # Data loading and management
-    ├── search-manager.js      # Search functionality
-    ├── pagination-manager.js  # Pagination controls
-    ├── modal-manager.js       # Add member modal
-    ├── overview-manager.js    # Overview page logic
-    └── user-detail-manager.js # User detail page logic
+    ├── auth-manager.js        # Authentication handling
+    ├── data-manager.js        # Data operations (CRUD)
+    ├── search-manager.js      # Search and filtering
+    ├── pagination-manager.js  # Table pagination
+    ├── modal-manager.js       # Add/edit member forms
+    ├── overview-manager.js    # Main dashboard logic
+    └── user-detail-manager.js # Member detail pages
 ```
+
+## Key Features
+
+### Data Synchronization
+- **Complete Form Sync**: All "Add New Staff" form fields sync to table and detail views
+- **Real-time Updates**: Changes appear immediately in all views
+- **Data Persistence**: Automatic saving to server with error handling
+
+### Member Information Display
+- **Overview Table**: Shows booking number, name, contact info, status
+- **Detail View**: Complete member profile with all information
+- **Responsive Design**: Works on desktop and mobile devices
+
+### Form Fields Supported
+- Personal: Name, gender, age, birthday, address
+- Contact: Email, mobile number
+- Membership: Package type, start/end dates, payment info
+- Status: Payment status with color-coded badges
 
 ## Module Responsibilities
 
-### Core Modules
-- **app.js**: Application initialization and global setup
-- **theme-manager.js**: Dark/light theme switching
-- **core/router.js**: URL routing and page navigation
+### Core System
+- **app.js**: Initialize application and coordinate all managers
+- **router.js**: Handle navigation between overview and detail pages
+- **theme-manager.js**: Toggle between light and dark themes
 
-### Feature Modules
-- **data-manager.js**: Handles all data operations (load, save, filter)
-- **search-manager.js**: Search input handling and filtering
-- **pagination-manager.js**: Page navigation controls
-- **modal-manager.js**: Add member form and validation
-- **overview-manager.js**: Overview page coordination
-- **user-detail-manager.js**: User detail page display
+### Data Management
+- **data-manager.js**: Load, save, add, remove member data
+- **auth-manager.js**: Handle user authentication and permissions
 
-## Design Principles
+### User Interface
+- **overview-manager.js**: Manage member table, search, pagination
+- **modal-manager.js**: Handle add member form and validation
+- **user-detail-manager.js**: Display complete member information
+- **search-manager.js**: Filter members by name, email, status
+- **pagination-manager.js**: Navigate through member pages
 
-1. **Single Responsibility**: Each file has one clear purpose
-2. **Small Files**: Easy to read and maintain
-3. **Clear Dependencies**: Modules depend on each other logically
-4. **Simple Structure**: No complex inheritance or patterns
-5. **Reusable Components**: Managers can be used independently
+## Data Flow
 
-## Loading Order
+```
+Add Member Form → Modal Manager → Data Manager → Server Save → Table Refresh
+                                      ↓
+Member Click → Router → User Detail Manager → Display All Info
+```
 
-Files are loaded in dependency order in `index.html`:
-1. Data and utility modules first
-2. Feature modules next
-3. Core router
-4. Theme manager
-5. Main app last
+## Simple Code Design
+
+- **No Complex Logging**: Clean code without debug messages
+- **Easy to Read**: Simple functions with clear names
+- **Minimal Dependencies**: Each module does one thing well
+- **Error Handling**: Basic validation and user feedback
+- **Maintainable**: Easy to modify and extend
+
+## Usage
+
+1. **Add New Member**: Click "Add New Staff" → Fill form → Submit
+2. **View Details**: Click any member row → See complete information
+3. **Search Members**: Type in search box → Results filter automatically
+4. **Navigate Pages**: Use pagination controls at bottom
+
+All data entered in forms automatically appears in both the table and detail views.
