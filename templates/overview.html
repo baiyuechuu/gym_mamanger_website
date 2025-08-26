@@ -34,9 +34,11 @@
     </div>
     <div class="p-3">
       <div class="space-y-6">
-        <!-- Filters and Actions Bar -->
+        <!-- Top Controls Bar -->
         <div class="flex flex-wrap items-center justify-between gap-4">
+          <!-- Left side: Pagination and Filters -->
           <div class="flex flex-wrap items-center gap-3">
+
             <!-- Filter Dropdowns -->
             <div class="relative">
               <select
@@ -88,7 +90,14 @@
             </button>
           </div>
 
+          <!-- Right side: Add Button and Search -->
           <div class="flex items-center gap-3">
+            <!-- Add New Staff Button -->
+            <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium">
+              <i class="fa-solid fa-plus"></i>
+              <span>ADD NEW STAFF</span>
+            </button>
+            
             <!-- Search -->
             <div class="relative">
               <i
@@ -168,50 +177,31 @@
       </div>
     </div>
   </div>
-  <!-- Pagination -->
+  <!-- Bottom Pagination -->
   <div
-    class="bg-white dark:bg-gray-800 p-3 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between"
+    class="bg-white dark:bg-gray-800 p-4 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between"
   >
-    <div class="flex items-center border rounded-md border-gray-300 dark:border-gray-600">
-      <button
-        class="flex items-center px-3 py-2 text-sm text-gray-500 hover:text-gray-700"
-      >
-        <i class="fa-regular fa-chevron-left mr-1"></i>
-        Previous
-      </button>
+    <!-- Previous Button -->
+    <button
+      id="prev-button"
+      class="flex items-center px-4 py-2 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      <i class="fa-regular fa-chevron-left mr-2"></i>
+      Previous
+    </button>
+
+    <!-- Page Numbers -->
+    <div class="flex items-center space-x-2" id="bottom-pagination">
+      <!-- Page numbers will be dynamically generated -->
     </div>
 
-    <div class="flex items-center space-x-2">
-      <button
-        class="w-8 h-8 flex items-center justify-center text-sm bg-purple-600 text-white rounded"
-      >
-        1
-      </button>
-      <button
-        class="w-8 h-8 flex items-center justify-center text-sm text-gray-500 hover:text-gray-700"
-      >
-        2
-      </button>
-      <span class="text-gray-400">...</span>
-      <button
-        class="w-8 h-8 flex items-center justify-center text-sm text-gray-500 hover:text-gray-700"
-      >
-        10
-      </button>
-      <button
-        class="w-8 h-8 flex items-center justify-center text-sm text-gray-500 hover:text-gray-700"
-      >
-        12
-      </button>
-    </div>
-
-    <div class="flex items-center border rounded-md border-gray-300 dark:border-gray-600">
-      <button
-        class="flex items-center px-3 py-2 text-sm text-gray-500 hover:text-gray-700"
-      >
-        Next
-        <i class="fa-regular fa-chevron-right ml-1"></i>
-      </button>
-    </div>
+    <!-- Next Button -->
+    <button
+      id="next-button"
+      class="flex items-center px-4 py-2 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      Next
+      <i class="fa-regular fa-chevron-right ml-2"></i>
+    </button>
   </div>
 </div>

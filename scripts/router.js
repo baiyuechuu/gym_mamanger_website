@@ -119,6 +119,15 @@ class GymRouter {
 	}
 
 	initializeOverviewFeatures() {
+		// Initialize pagination state
+		this.pagination = {
+			currentPage: 1,
+			itemsPerPage: 4,
+			totalItems: 0,
+			totalPages: 0,
+			allData: []
+		};
+
 		// Initialize search functionality for the overview page
 		if (window.SearchManager) {
 			// Use setTimeout to ensure DOM elements are fully rendered
@@ -144,54 +153,16 @@ class GymRouter {
 		try {
 			const response = await fetch("data/gym-members.json");
 			const data = await response.json();
-			const tableBody = document.getElementById("booking-table-body");
-
-			if (!tableBody) {
-				console.warn("Table body element not found");
-				return;
-			}
-
-			// Clear existing content
-			tableBody.innerHTML = "";
-
-			// Populate table with data from JSON
-			data.members.forEach((member) => {
-				const row = document.createElement("tr");
-				row.className = "hover:bg-gray-50 dark:hover:bg-gray-600";
-
-				row.innerHTML = `
-					<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
-						${member.bookingNo}
-					</td>
-					<td class="px-6 py-4">
-						<div class="flex items-center">
-							<span class="text-sm text-gray-900 dark:text-gray-100">${member.name}</span>
-						</div>
-					</td>
-					<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
-						${member.sex}
-					</td>
-					<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
-						${member.age}
-					</td>
-					<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
-						${member.email}
-					</td>
-					<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
-						${member.mobile}
-					</td>
-					<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
-						${member.lastVisit}
-					</td>
-					<td class="px-6 py-4">
-						<span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${member.statusClass} whitespace-nowrap">
-							${member.expiryStatus}
-						</span>
-					</td>
-				`;
-
-				tableBody.appendChild(row);
-			});
+			
+			// Store all data for pagination
+			this.pagination.allData = data.members;
+			this.pagination.totalItems = data.members.length;
+			this.pagination.totalPages = Math.ceil(this.pagination.totalItems / this.pagination.itemsPerPage);
+			
+			// Display current page
+			this.displayCurrentPage();
+			this.setupPaginationControls();
+			
 		} catch (error) {
 			console.error("Error loading gym members data:", error);
 			const tableBody = document.getElementById("booking-table-body");
@@ -204,6 +175,188 @@ class GymRouter {
 					</tr>
 				`;
 			}
+		}
+	}
+
+	displayCurrentPage() {
+		const tableBody = document.getElementById("booking-table-body");
+		if (!tableBody) {
+			console.warn("Table body element not found");
+			return;
+		}
+
+		// Clear existing content
+		tableBody.innerHTML = "";
+
+		// Calculate start and end indices for current page
+		const startIndex = (this.pagination.currentPage - 1) * this.pagination.itemsPerPage;
+		const endIndex = startIndex + this.pagination.itemsPerPage;
+		const currentPageData = this.pagination.allData.slice(startIndex, endIndex);
+
+		// Populate table with current page data
+		currentPageData.forEach((member) => {
+			const row = document.createElement("tr");
+			row.className = "hover:bg-gray-50 dark:hover:bg-gray-600";
+
+			row.innerHTML = `
+				<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+					${member.bookingNo}
+				</td>
+				<td class="px-6 py-4">
+					<div class="flex items-center">
+						<span class="text-sm text-gray-900 dark:text-gray-100">${member.name}</span>
+					</div>
+				</td>
+				<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+					${member.sex}
+				</td>
+				<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+					${member.age}
+				</td>
+				<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+					${member.email}
+				</td>
+				<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+					${member.mobile}
+				</td>
+				<td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+					${member.lastVisit}
+				</td>
+				<td class="px-6 py-4">
+					<span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${member.statusClass} whitespace-nowrap">
+						${member.expiryStatus}
+					</span>
+				</td>
+			`;
+
+			tableBody.appendChild(row);
+		});
+	}
+
+	setupPaginationControls() {
+		// Setup Previous button
+		const prevButton = document.getElementById('prev-button');
+		if (prevButton) {
+			prevButton.onclick = () => this.goToPreviousPage();
+			prevButton.disabled = this.pagination.currentPage === 1;
+		}
+
+		// Setup Next button
+		const nextButton = document.getElementById('next-button');
+		if (nextButton) {
+			nextButton.onclick = () => this.goToNextPage();
+			nextButton.disabled = this.pagination.currentPage === this.pagination.totalPages;
+		}
+
+		// Setup top pagination (simple page numbers)
+		const topPagination = document.getElementById('top-pagination');
+		if (topPagination) {
+			topPagination.innerHTML = '';
+			
+			for (let i = 1; i <= this.pagination.totalPages; i++) {
+				const pageButton = document.createElement('button');
+				pageButton.className = `w-8 h-8 flex items-center justify-center text-sm rounded ${
+					i === this.pagination.currentPage 
+						? 'bg-purple-600 text-white' 
+						: 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+				}`;
+				pageButton.textContent = i;
+				pageButton.onclick = () => this.goToPage(i);
+				topPagination.appendChild(pageButton);
+			}
+		}
+
+		// Setup bottom pagination (with ellipsis for many pages)
+		const bottomPagination = document.getElementById('bottom-pagination');
+		if (bottomPagination) {
+			bottomPagination.innerHTML = '';
+			
+			// For small number of pages, show all
+			if (this.pagination.totalPages <= 5) {
+				for (let i = 1; i <= this.pagination.totalPages; i++) {
+					const pageButton = document.createElement('button');
+					pageButton.className = `w-8 h-8 flex items-center justify-center text-sm rounded ${
+						i === this.pagination.currentPage 
+							? 'bg-purple-600 text-white' 
+							: 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+					}`;
+					pageButton.textContent = i;
+					pageButton.onclick = () => this.goToPage(i);
+					bottomPagination.appendChild(pageButton);
+				}
+			} else {
+				// For many pages, show with ellipsis
+				this.createPaginationWithEllipsis(bottomPagination);
+			}
+		}
+	}
+
+	createPaginationWithEllipsis(container) {
+		const current = this.pagination.currentPage;
+		const total = this.pagination.totalPages;
+		
+		// Always show first page
+		this.createPageButton(container, 1, current === 1);
+		
+		// Show ellipsis if needed
+		if (current > 3) {
+			const ellipsis = document.createElement('span');
+			ellipsis.textContent = '...';
+			ellipsis.className = 'text-gray-400 dark:text-gray-500';
+			container.appendChild(ellipsis);
+		}
+		
+		// Show pages around current
+		const start = Math.max(2, current - 1);
+		const end = Math.min(total - 1, current + 1);
+		
+		for (let i = start; i <= end; i++) {
+			this.createPageButton(container, i, i === current);
+		}
+		
+		// Show ellipsis if needed
+		if (current < total - 2) {
+			const ellipsis = document.createElement('span');
+			ellipsis.textContent = '...';
+			ellipsis.className = 'text-gray-400 dark:text-gray-500';
+			container.appendChild(ellipsis);
+		}
+		
+		// Always show last page (if more than 1 page)
+		if (total > 1) {
+			this.createPageButton(container, total, current === total);
+		}
+	}
+
+	createPageButton(container, pageNumber, isActive) {
+		const pageButton = document.createElement('button');
+		pageButton.className = `w-8 h-8 flex items-center justify-center text-sm rounded ${
+			isActive 
+				? 'bg-purple-600 text-white' 
+				: 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+		}`;
+		pageButton.textContent = pageNumber;
+		pageButton.onclick = () => this.goToPage(pageNumber);
+		container.appendChild(pageButton);
+	}
+
+	goToPage(pageNumber) {
+		if (pageNumber >= 1 && pageNumber <= this.pagination.totalPages) {
+			this.pagination.currentPage = pageNumber;
+			this.displayCurrentPage();
+			this.setupPaginationControls();
+		}
+	}
+
+	goToPreviousPage() {
+		if (this.pagination.currentPage > 1) {
+			this.goToPage(this.pagination.currentPage - 1);
+		}
+	}
+
+	goToNextPage() {
+		if (this.pagination.currentPage < this.pagination.totalPages) {
+			this.goToPage(this.pagination.currentPage + 1);
 		}
 	}
 
