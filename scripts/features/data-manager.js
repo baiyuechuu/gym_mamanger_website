@@ -68,6 +68,24 @@ class DataManager {
         this.filteredData = this.filteredData.filter(member => member.bookingNo !== bookingNo);
     }
 
+    updateMember(bookingNo, updatedData) {
+        const memberIndex = this.allData.findIndex(member => member.bookingNo === bookingNo);
+        if (memberIndex === -1) {
+            throw new Error(`Member with booking number ${bookingNo} not found`);
+        }
+
+        // Update the member data
+        this.allData[memberIndex] = { ...this.allData[memberIndex], ...updatedData };
+        
+        // Update filtered data as well
+        const filteredIndex = this.filteredData.findIndex(member => member.bookingNo === bookingNo);
+        if (filteredIndex !== -1) {
+            this.filteredData[filteredIndex] = { ...this.filteredData[filteredIndex], ...updatedData };
+        }
+
+        return this.allData[memberIndex];
+    }
+
     findMemberByBookingNo(bookingNo) {
         return this.allData.find(member => member.bookingNo === bookingNo);
     }

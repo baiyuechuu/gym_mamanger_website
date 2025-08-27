@@ -45,23 +45,36 @@
         </div>
       </div>
     </div>
-    
+
     <div class="p-6">
       <div id="user-detail-content" class="space-y-6">
         <!-- Loading state -->
         <div id="loading-state" class="flex items-center justify-center py-12">
           <div class="text-center">
-            <i class="fa-regular fa-spinner fa-spin text-3xl text-gray-400 dark:text-gray-500 mb-3"></i>
-            <p class="text-gray-500 dark:text-gray-400">Loading member details...</p>
+            <i
+              class="fa-regular fa-spinner fa-spin text-3xl text-gray-400 dark:text-gray-500 mb-3"
+            ></i>
+            <p class="text-gray-500 dark:text-gray-400">
+              Loading member details...
+            </p>
           </div>
         </div>
-        
+
         <!-- Error state -->
-        <div id="error-state" class="hidden flex items-center justify-center py-12">
+        <div
+          id="error-state"
+          class="hidden flex items-center justify-center py-12"
+        >
           <div class="text-center">
-            <i class="fa-regular fa-exclamation-triangle text-3xl text-red-500 mb-3"></i>
-            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Member Not Found</h3>
-            <p class="text-gray-500 dark:text-gray-400 mb-4">The requested member could not be found.</p>
+            <i
+              class="fa-regular fa-exclamation-triangle text-3xl text-red-500 mb-3"
+            ></i>
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">
+              Member Not Found
+            </h3>
+            <p class="text-gray-500 dark:text-gray-400 mb-4">
+              The requested member could not be found.
+            </p>
             <button
               onclick="window.gymRouter.navigateTo('overview')"
               class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
@@ -70,13 +83,17 @@
             </button>
           </div>
         </div>
-        
+
         <!-- Member details content -->
         <div id="member-details" class="hidden">
           <!-- Member Header -->
-          <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg p-6 text-white mb-6">
+          <div
+            class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg p-6 text-white mb-6"
+          >
             <div class="flex items-center space-x-4">
-              <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+              <div
+                class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center"
+              >
                 <i class="fa-regular fa-user text-2xl"></i>
               </div>
               <div>
@@ -85,133 +102,686 @@
               </div>
             </div>
           </div>
-          
+
           <!-- Member Information Grid -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <!-- Personal Information -->
-            <div class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6">
-              <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <div
+              class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6"
+            >
+              <h2
+                class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
                 <i class="fa-regular fa-user-circle mr-2 text-purple-600"></i>
                 Personal Information
               </h2>
               <div class="space-y-4">
-                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
-                  <span class="text-gray-600 dark:text-gray-400">Full Name</span>
-                  <span id="detail-name" class="font-medium text-gray-900 dark:text-white"></span>
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600"
+                >
+                  <span class="text-gray-600 dark:text-gray-400"
+                    >Full Name</span
+                  >
+                  <span
+                    id="detail-name"
+                    class="font-medium text-gray-900 dark:text-white"
+                  ></span>
                 </div>
-                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600"
+                >
                   <span class="text-gray-600 dark:text-gray-400">Gender</span>
-                  <span id="detail-sex" class="font-medium text-gray-900 dark:text-white"></span>
+                  <span
+                    id="detail-sex"
+                    class="font-medium text-gray-900 dark:text-white"
+                  ></span>
                 </div>
-                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600"
+                >
                   <span class="text-gray-600 dark:text-gray-400">Age</span>
-                  <span id="detail-age" class="font-medium text-gray-900 dark:text-white"></span>
+                  <span
+                    id="detail-age"
+                    class="font-medium text-gray-900 dark:text-white"
+                  ></span>
                 </div>
-                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600"
+                >
                   <span class="text-gray-600 dark:text-gray-400">Birthday</span>
-                  <span id="detail-birthday" class="font-medium text-gray-900 dark:text-white"></span>
+                  <span
+                    id="detail-birthday"
+                    class="font-medium text-gray-900 dark:text-white"
+                  ></span>
                 </div>
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-gray-600 dark:text-gray-400">Booking Number</span>
-                  <span id="detail-booking-no" class="font-medium text-gray-900 dark:text-white"></span>
+                  <span class="text-gray-600 dark:text-gray-400"
+                    >Booking Number</span
+                  >
+                  <span
+                    id="detail-booking-no"
+                    class="font-medium text-gray-900 dark:text-white"
+                  ></span>
                 </div>
               </div>
             </div>
-            
+
             <!-- Contact Information -->
-            <div class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6">
-              <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <div
+              class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6"
+            >
+              <h2
+                class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
                 <i class="fa-regular fa-address-book mr-2 text-purple-600"></i>
                 Contact Information
               </h2>
               <div class="space-y-4">
-                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600"
+                >
                   <span class="text-gray-600 dark:text-gray-400">Email</span>
-                  <a id="detail-email" href="#" class="font-medium text-blue-600 dark:text-blue-400 hover:underline"></a>
+                  <a
+                    id="detail-email"
+                    href="#"
+                    class="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+                  ></a>
                 </div>
-                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
-                  <span class="text-gray-600 dark:text-gray-400">Mobile Number</span>
-                  <a id="detail-mobile" href="#" class="font-medium text-blue-600 dark:text-blue-400 hover:underline"></a>
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600"
+                >
+                  <span class="text-gray-600 dark:text-gray-400"
+                    >Mobile Number</span
+                  >
+                  <a
+                    id="detail-mobile"
+                    href="#"
+                    class="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+                  ></a>
                 </div>
                 <div class="flex justify-between items-center py-2">
                   <span class="text-gray-600 dark:text-gray-400">Address</span>
-                  <span id="detail-address" class="font-medium text-gray-900 dark:text-white text-right max-w-xs"></span>
+                  <span
+                    id="detail-address"
+                    class="font-medium text-gray-900 dark:text-white text-right max-w-xs"
+                  ></span>
                 </div>
               </div>
             </div>
-            
+
             <!-- Membership Status -->
-            <div class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6">
-              <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                <i class="fa-regular fa-calendar-check mr-2 text-purple-600"></i>
+            <div
+              class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6"
+            >
+              <h2
+                class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
+                <i
+                  class="fa-regular fa-calendar-check mr-2 text-purple-600"
+                ></i>
                 Membership Status
               </h2>
               <div class="space-y-4">
-                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600"
+                >
                   <span class="text-gray-600 dark:text-gray-400">Status</span>
-                  <span id="detail-status" class="inline-flex px-3 py-1 text-sm font-semibold rounded-full"></span>
+                  <span
+                    id="detail-status"
+                    class="inline-flex px-3 py-1 text-sm font-semibold rounded-full"
+                  ></span>
                 </div>
-                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
-                  <span class="text-gray-600 dark:text-gray-400">Package Type</span>
-                  <span id="detail-package-type" class="font-medium text-gray-900 dark:text-white"></span>
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600"
+                >
+                  <span class="text-gray-600 dark:text-gray-400"
+                    >Package Type</span
+                  >
+                  <span
+                    id="detail-package-type"
+                    class="font-medium text-gray-900 dark:text-white"
+                  ></span>
                 </div>
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-gray-600 dark:text-gray-400">Last Visit</span>
-                  <span id="detail-last-visit" class="font-medium text-gray-900 dark:text-white"></span>
+                  <span class="text-gray-600 dark:text-gray-400"
+                    >Last Visit</span
+                  >
+                  <span
+                    id="detail-last-visit"
+                    class="font-medium text-gray-900 dark:text-white"
+                  ></span>
                 </div>
               </div>
             </div>
-            
+
             <!-- Membership Details -->
-            <div class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6">
-              <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <div
+              class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6"
+            >
+              <h2
+                class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
                 <i class="fa-regular fa-calendar mr-2 text-purple-600"></i>
                 Membership Details
               </h2>
               <div class="space-y-4">
-                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
-                  <span class="text-gray-600 dark:text-gray-400">Signup Date</span>
-                  <span id="detail-signup-date" class="font-medium text-gray-900 dark:text-white"></span>
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600"
+                >
+                  <span class="text-gray-600 dark:text-gray-400"
+                    >Signup Date</span
+                  >
+                  <span
+                    id="detail-signup-date"
+                    class="font-medium text-gray-900 dark:text-white"
+                  ></span>
                 </div>
-                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
-                  <span class="text-gray-600 dark:text-gray-400">Start Date</span>
-                  <span id="detail-start-date" class="font-medium text-gray-900 dark:text-white"></span>
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600"
+                >
+                  <span class="text-gray-600 dark:text-gray-400"
+                    >Start Date</span
+                  >
+                  <span
+                    id="detail-start-date"
+                    class="font-medium text-gray-900 dark:text-white"
+                  ></span>
                 </div>
-                <div class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600">
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-600"
+                >
                   <span class="text-gray-600 dark:text-gray-400">End Date</span>
-                  <span id="detail-end-date" class="font-medium text-gray-900 dark:text-white"></span>
+                  <span
+                    id="detail-end-date"
+                    class="font-medium text-gray-900 dark:text-white"
+                  ></span>
                 </div>
                 <div class="flex justify-between items-center py-2">
-                  <span class="text-gray-600 dark:text-gray-400">Payment Date</span>
-                  <span id="detail-payment-date" class="font-medium text-gray-900 dark:text-white"></span>
+                  <span class="text-gray-600 dark:text-gray-400"
+                    >Payment Date</span
+                  >
+                  <span
+                    id="detail-payment-date"
+                    class="font-medium text-gray-900 dark:text-white"
+                  ></span>
                 </div>
               </div>
             </div>
-            
+
             <!-- Quick Actions -->
-            <div class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6">
-              <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <div
+              class="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6"
+            >
+              <h2
+                class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center"
+              >
                 <i class="fa-regular fa-bolt mr-2 text-purple-600"></i>
                 Quick Actions
               </h2>
               <div class="space-y-3">
-                <button class="w-full flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                <button
+                  class="w-full flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                >
                   <i class="fa-regular fa-check mr-2"></i>
                   Mark as Visited
                 </button>
-                <button class="w-full flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                <button
+                  id="collect-payment-btn"
+                  class="w-full flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                >
                   <i class="fa-regular fa-credit-card mr-2"></i>
-                  Process Payment
+                  Collect Payment
                 </button>
-                <button class="w-full flex items-center justify-center px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition-colors">
+                <button
+                  class="w-full flex items-center justify-center px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition-colors"
+                >
                   <i class="fa-regular fa-envelope mr-2"></i>
                   Send Message
+                </button>
+                <button
+                  id="terminate-membership-btn"
+                  class="w-full flex items-center justify-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+                >
+                  <i class="fa-regular fa-user-times mr-2"></i>
+                  Terminate Membership
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Edit Member Modal -->
+  <div
+    id="edit-member-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div
+      class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto"
+    >
+      <div
+        class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700"
+      >
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+          Edit Member Information
+        </h3>
+        <button
+          id="close-edit-modal-btn"
+          class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+        >
+          <i class="fa-regular fa-times text-xl"></i>
+        </button>
+      </div>
+
+      <form id="edit-member-form" class="p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Personal Information -->
+          <div class="space-y-4">
+            <h4 class="font-medium text-gray-900 dark:text-white">
+              Personal Information
+            </h4>
+
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >Full Name</label
+              >
+              <input
+                type="text"
+                id="edit-name"
+                name="name"
+                required
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >Gender</label
+              >
+              <select
+                id="edit-sex"
+                name="sex"
+                required
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >Age</label
+              >
+              <input
+                type="number"
+                id="edit-age"
+                name="age"
+                min="16"
+                max="100"
+                required
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >Birthday</label
+              >
+              <input
+                type="date"
+                id="edit-birthday"
+                name="birthday"
+                required
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+              />
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="space-y-4">
+            <h4 class="font-medium text-gray-900 dark:text-white">
+              Contact Information
+            </h4>
+
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="edit-email"
+                name="email"
+                required
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >Mobile Number</label
+              >
+              <input
+                type="tel"
+                id="edit-mobile"
+                name="mobile"
+                required
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >Address</label
+              >
+              <textarea
+                id="edit-address"
+                name="address"
+                rows="3"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Membership Information -->
+        <div class="mt-6 space-y-4">
+          <h4 class="font-medium text-gray-900 dark:text-white">
+            Membership Information
+          </h4>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >Package Type</label
+              >
+              <select
+                id="edit-package-type"
+                name="packageType"
+                required
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+              >
+                <option value="month">1 Month</option>
+                <option value="6month">6 Months</option>
+                <option value="year">1 Year</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >Start Date</label
+              >
+              <input
+                type="date"
+                id="edit-start-date"
+                name="startDate"
+                required
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >End Date</label
+              >
+              <input
+                type="date"
+                id="edit-end-date"
+                name="endDate"
+                required
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="flex justify-end space-x-3 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700"
+        >
+          <button
+            type="button"
+            id="cancel-edit-btn"
+            class="px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+          >
+            <i class="fa-regular fa-save mr-2"></i>
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Payment Collection Modal -->
+  <div
+    id="payment-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div
+      class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4"
+    >
+      <div
+        class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700"
+      >
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+          Collect Payment
+        </h3>
+        <button
+          id="close-payment-modal-btn"
+          class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+        >
+          <i class="fa-regular fa-times text-xl"></i>
+        </button>
+      </div>
+
+      <form id="payment-form" class="p-6">
+        <div class="space-y-4">
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >Payment Method</label
+            >
+            <select
+              id="payment-method"
+              name="paymentMethod"
+              required
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+            >
+              <option value="Cash - Paid">Cash Payment</option>
+              <option value="Online - Paid">Online Payment</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >Amount</label
+            >
+            <input
+              type="number"
+              id="payment-amount"
+              name="amount"
+              step="0.01"
+              min="0"
+              required
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+            />
+          </div>
+
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >Payment Date</label
+            >
+            <input
+              type="date"
+              id="payment-date"
+              name="paymentDate"
+              required
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+            />
+          </div>
+
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >Notes (Optional)</label
+            >
+            <textarea
+              id="payment-notes"
+              name="notes"
+              rows="3"
+              placeholder="Additional payment notes..."
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+            ></textarea>
+          </div>
+        </div>
+
+        <div
+          class="flex justify-end space-x-3 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700"
+        >
+          <button
+            type="button"
+            id="cancel-payment-btn"
+            class="px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+          >
+            <i class="fa-regular fa-check mr-2"></i>
+            Process Payment
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Termination Confirmation Modal -->
+  <div
+    id="termination-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div
+      class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4"
+    >
+      <div
+        class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700"
+      >
+        <h3 class="text-lg font-semibold text-red-600 dark:text-red-400">
+          Terminate Membership
+        </h3>
+        <button
+          id="close-termination-modal-btn"
+          class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+        >
+          <i class="fa-regular fa-times text-xl"></i>
+        </button>
+      </div>
+
+      <form id="termination-form" class="p-6">
+        <div class="space-y-4">
+          <div
+            class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4"
+          >
+            <div class="flex items-center">
+              <i
+                class="fa-regular fa-exclamation-triangle text-red-500 mr-2"
+              ></i>
+              <p class="text-sm text-red-700 dark:text-red-300">
+                This action will terminate the member's subscription and cannot
+                be undone.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >Termination Date</label
+            >
+            <input
+              type="date"
+              id="termination-date"
+              name="terminationDate"
+              required
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:text-white"
+            />
+          </div>
+
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >Reason for Termination</label
+            >
+            <select
+              id="termination-reason"
+              name="reason"
+              required
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:text-white"
+            >
+              <option value="">Select a reason...</option>
+              <option value="Member Request">Member Request</option>
+              <option value="Non-Payment">Non-Payment</option>
+              <option value="Policy Violation">Policy Violation</option>
+              <option value="Relocation">Relocation</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >Additional Notes</label
+            >
+            <textarea
+              id="termination-notes"
+              name="notes"
+              rows="3"
+              placeholder="Additional termination details..."
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:text-white"
+            ></textarea>
+          </div>
+        </div>
+
+        <div
+          class="flex justify-end space-x-3 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700"
+        >
+          <button
+            type="button"
+            id="cancel-termination-btn"
+            class="px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+          >
+            <i class="fa-regular fa-user-times mr-2"></i>
+            Terminate Membership
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
