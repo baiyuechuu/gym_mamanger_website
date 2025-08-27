@@ -1,142 +1,159 @@
 // Data Management - Handle gym members data operations
 class DataManager {
-    constructor() {
-        this.allData = [];
-        this.filteredData = [];
-    }
+	constructor() {
+		this.allData = [];
+		this.filteredData = [];
+	}
 
-    async loadGymMembersData() {
-        try {
-            const response = await fetch("data/gym-members.json");
-            const data = await response.json();
-            
-            this.allData = data.members;
-            this.filteredData = [...data.members];
-            
-            return { success: true, data: this.allData };
-        } catch (error) {
-            console.error("Error loading gym members data:", error);
-            return { success: false, error: error.message };
-        }
-    }
+	async loadGymMembersData() {
+		try {
+			const response = await fetch("data/gym-members.json");
+			const data = await response.json();
 
-    async saveMembersToFile() {
-        try {
-            const response = await fetch('/api/save-members', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    members: this.allData
-                })
-            });
+			this.allData = data.members;
+			this.filteredData = [...data.members];
 
-            const result = await response.json();
-            
-            if (!response.ok) {
-                throw new Error(result.message || 'Failed to save data');
-            }
+			return { success: true, data: this.allData };
+		} catch (error) {
+			console.error("Error loading gym members data:", error);
+			return { success: false, error: error.message };
+		}
+	}
 
-            console.log('Data saved successfully:', result.message);
-            return { success: true, data: result };
+	async saveMembersToFile() {
+		try {
+			const response = await fetch("/api/save-members", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					members: this.allData,
+				}),
+			});
 
-        } catch (error) {
-            console.error('Error saving to file:', error);
-            return { success: false, error: error.message };
-        }
-    }
+			const result = await response.json();
 
-    addMember(memberData) {
-        // Validate member data
-        if (!memberData.bookingNo || !memberData.name || !memberData.email) {
-            throw new Error('Invalid member data - missing required fields');
-        }
-        
-        // Check for duplicates
-        const existingMember = this.findMemberByBookingNo(memberData.bookingNo);
-        if (existingMember) {
-            throw new Error(`Member with booking number ${memberData.bookingNo} already exists`);
-        }
-        
-        this.allData.unshift(memberData);
-        this.filteredData.unshift(memberData);
-    }
+			if (!response.ok) {
+				throw new Error(result.message || "Failed to save data");
+			}
 
-    removeMember(bookingNo) {
-        this.allData = this.allData.filter(member => member.bookingNo !== bookingNo);
-        this.filteredData = this.filteredData.filter(member => member.bookingNo !== bookingNo);
-    }
+			console.log("Data saved successfully:", result.message);
+			return { success: true, data: result };
+		} catch (error) {
+			console.error("Error saving to file:", error);
+			return { success: false, error: error.message };
+		}
+	}
 
-    updateMember(bookingNo, updatedData) {
-        const memberIndex = this.allData.findIndex(member => member.bookingNo === bookingNo);
-        if (memberIndex === -1) {
-            throw new Error(`Member with booking number ${bookingNo} not found`);
-        }
+	addMember(memberData) {
+		// Validate member data
+		if (!memberData.bookingNo || !memberData.name || !memberData.email) {
+			throw new Error("Invalid member data - missing required fields");
+		}
 
-        // Update the member data
-        this.allData[memberIndex] = { ...this.allData[memberIndex], ...updatedData };
-        
-        // Update filtered data as well
-        const filteredIndex = this.filteredData.findIndex(member => member.bookingNo === bookingNo);
-        if (filteredIndex !== -1) {
-            this.filteredData[filteredIndex] = { ...this.filteredData[filteredIndex], ...updatedData };
-        }
+		// Check for duplicates
+		const existingMember = this.findMemberByBookingNo(memberData.bookingNo);
+		if (existingMember) {
+			throw new Error(
+				`Member with booking number ${memberData.bookingNo} already exists`,
+			);
+		}
 
-        return this.allData[memberIndex];
-    }
+		this.allData.unshift(memberData);
+		this.filteredData.unshift(memberData);
+	}
 
-    findMemberByBookingNo(bookingNo) {
-        return this.allData.find(member => member.bookingNo === bookingNo);
-    }
+	removeMember(bookingNo) {
+		this.allData = this.allData.filter(
+			(member) => member.bookingNo !== bookingNo,
+		);
+		this.filteredData = this.filteredData.filter(
+			(member) => member.bookingNo !== bookingNo,
+		);
+	}
 
-    filterData(searchTerm) {
-        if (!searchTerm.trim()) {
-            this.filteredData = [...this.allData];
-            return this.filteredData;
-        }
+	updateMember(bookingNo, updatedData) {
+		const memberIndex = this.allData.findIndex(
+			(member) => member.bookingNo === bookingNo,
+		);
+		if (memberIndex === -1) {
+			throw new Error(`Member with booking number ${bookingNo} not found`);
+		}
 
-        const normalizedSearchTerm = searchTerm.toLowerCase().trim();
-        this.filteredData = this.allData.filter(member => {
-            return this.matchesSearchTerm(member, normalizedSearchTerm);
-        });
+		// Update the member data
+		this.allData[memberIndex] = {
+			...this.allData[memberIndex],
+			...updatedData,
+		};
 
-        return this.filteredData;
-    }
+		// Update filtered data as well
+		const filteredIndex = this.filteredData.findIndex(
+			(member) => member.bookingNo === bookingNo,
+		);
+		if (filteredIndex !== -1) {
+			this.filteredData[filteredIndex] = {
+				...this.filteredData[filteredIndex],
+				...updatedData,
+			};
+		}
 
-    matchesSearchTerm(member, searchTerm) {
-        const searchableFields = [
-            member.bookingNo,
-            member.name,
-            member.sex,
-            member.age.toString(),
-            member.email,
-            member.mobile,
-            member.lastVisit,
-            member.expiryStatus
-        ];
+		return this.allData[memberIndex];
+	}
 
-        const searchTerms = searchTerm.split(" ").filter(term => term.length > 0);
+	findMemberByBookingNo(bookingNo) {
+		return this.allData.find((member) => member.bookingNo === bookingNo);
+	}
 
-        return searchTerms.every(term =>
-            searchableFields.some(field => field.toLowerCase().includes(term))
-        );
-    }
+	filterData(searchTerm) {
+		if (!searchTerm.trim()) {
+			this.filteredData = [...this.allData];
+			return this.filteredData;
+		}
 
-    getLastBookingNumber() {
-        if (this.allData.length === 0) return '#102112';
-        
-        const bookingNumbers = this.allData.map(member => 
-            parseInt(member.bookingNo.replace('#', ''))
-        );
-        
-        return Math.max(...bookingNumbers);
-    }
+		const normalizedSearchTerm = searchTerm.toLowerCase().trim();
+		this.filteredData = this.allData.filter((member) => {
+			return this.matchesSearchTerm(member, normalizedSearchTerm);
+		});
 
-    generateBookingNumber(lastNumber) {
-        const nextNumber = typeof lastNumber === 'string' ? 
-            parseInt(lastNumber.replace('#', '')) + 1 : 
-            lastNumber + 1;
-        return `#${nextNumber}`;
-    }
+		return this.filteredData;
+	}
+
+	matchesSearchTerm(member, searchTerm) {
+		const searchableFields = [
+			member.bookingNo,
+			member.name,
+			member.sex,
+			member.age.toString(),
+			member.email,
+			member.mobile,
+			member.lastVisit,
+			member.expiryStatus,
+		];
+
+		const searchTerms = searchTerm.split(" ").filter((term) => term.length > 0);
+
+		return searchTerms.every((term) =>
+			searchableFields.some((field) => field.toLowerCase().includes(term)),
+		);
+	}
+
+	getLastBookingNumber() {
+		if (this.allData.length === 0) return "#102112";
+
+		const bookingNumbers = this.allData.map((member) =>
+			parseInt(member.bookingNo.replace("#", "")),
+		);
+
+		return Math.max(...bookingNumbers);
+	}
+
+	generateBookingNumber(lastNumber) {
+		const nextNumber =
+			typeof lastNumber === "string"
+				? parseInt(lastNumber.replace("#", "")) + 1
+				: lastNumber + 1;
+		return `#${nextNumber}`;
+	}
 }
+

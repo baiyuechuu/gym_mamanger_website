@@ -286,4 +286,3 @@ class ModalManager {
 		}, 3000);
 	}
 }
-

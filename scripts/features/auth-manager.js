@@ -231,4 +231,3 @@ class AuthManager {
 		return sessionData ? new Date(sessionData.loginTime) : null;
 	}
 }
-
