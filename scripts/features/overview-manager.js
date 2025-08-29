@@ -128,4 +128,3 @@ class OverviewManager {
 		this.updateDisplay(this.dataManager.filteredData);
 	}
 }
-
